@@ -1,4 +1,5 @@
 {set $static = 'setAssets' | snippet}
+{set $is_main_page = $_modx->resource.id === 1}
 
 <!DOCTYPE html>
 <html lang="ru" itemscope itemtype="http://schema.org/WebPage">
@@ -35,7 +36,7 @@
             <div class="container">
                 <header class="header">
                     {set $logo}<img src="{'default_tpl_assets' | config}img/logo.png" alt="" />{/set}
-                    {if $_modx->resource.id === 1}<div class="header__logo">{$logo}</div>{else}<a class="header__logo" href="/">{$logo}</a>{/if}
+                    {if $is_main_page}<div class="header__logo">{$logo}</div>{else}<a class="header__logo" href="/">{$logo}</a>{/if}
                     <div class="header__wrapper">
                         <div class="header__desc">{$_modx->config.default_logo_desc}</div>
                         <form class="search-form js-search-form">
@@ -66,7 +67,7 @@
                         'limit' => 0,
                         'outerClass' => 'nav__wrapper',
                         'rowClass' => 'nav__item',
-                        'tplOuter' => '@FILE chunks/nav/wrapper.tpl'
+                        'tplOuter' => '@FILE chunks/nav/wrapper.tpl',
                         'tpl' => '@FILE chunks/nav/item.tpl'
                     ]}
 
@@ -79,6 +80,25 @@
                     </div>
                 </nav>
 
+                {'pdoCrumbs' | snippet: [
+                    'showHome' => 1,
+                    'showAtHome' => 0,
+                    'tplWrapper' => '@FILE chunks/bc/wrapper.tpl'
+                    'tplCurrent' => '@FILE chunks/bc/current.tpl'
+                    'tpl' => '@FILE chunks/bc/item.tpl'
+                ]}
+
+                <section class="intro">
+                    <div class="section content content_width_min content_fs_lg zi-2">
+                        <h1>{$_modx->resource.longtitle ?: $_modx->resource.pagetitle}</h1>
+                        {if $_modx->resource.introtext}<p>{$_modx->resource.introtext}</p>{/if}
+                    </div>
+                    
+                    <div class="section section_type_col zi-2">
+                        {block 'intro'}{/block}
+                        <div class="content content_fs_lg content_width_min">{$_modx->resource.content}</div>
+                    </div>                    
+                </section>
 
                 {block 'main'}{/block}
             </div>
@@ -91,7 +111,7 @@
                         <img src="{'default_tpl_assets' | config}img/logo-white.png" alt="" />
                         {$_modx->config.default_logo_desc}
                     {/set}
-                    {if $_modx->resource.id === 1}<div class="footer__logo">{$footer_logo}</div>{else}<a class="footer__logo" href="/">{$footer_logo}</a>{/if}
+                    {if $is_main_page}<div class="footer__logo">{$footer_logo}</div>{else}<a class="footer__logo" href="/">{$footer_logo}</a>{/if}
 
                     {set $footer_nav}
                         {set $footer_nav_counter = 0}

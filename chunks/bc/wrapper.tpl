@@ -1,0 +1,1 @@
+<nav class="pathway">{$output}</nav>

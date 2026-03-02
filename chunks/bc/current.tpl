@@ -1,0 +1,1 @@
+<span class="pathway__item pathway__item_type_current">{$menutitle}</span>
