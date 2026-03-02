@@ -1,0 +1,1 @@
+<nav {$classes}>{$wrapper}</nav>
