@@ -1,0 +1,1 @@
+<li class="footer__contacts-text"><a class="footer__nav-link footer__nav-link_fs_sm" href="tel:{$phone | formatPhoneValue}">{$phone}</a> - {$city}</li>

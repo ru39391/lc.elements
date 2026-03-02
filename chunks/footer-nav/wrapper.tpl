@@ -1,0 +1,1 @@
+<nav class="footer__nav">{$wrapper}</nav>
