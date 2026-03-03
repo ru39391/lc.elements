@@ -39,7 +39,7 @@
                     {if $is_main_page}<div class="header__logo">{$logo}</div>{else}<a class="header__logo" href="/">{$logo}</a>{/if}
                     <div class="header__wrapper">
                         <div class="header__desc">{$_modx->config.default_logo_desc}</div>
-                        <form class="search-form js-search-form">
+                        <form class="search-form js-search">
                             <button class="search-form__btn" type="submit">{include 'file:chunks/icons/search-icon.tpl'}</button>
                             <input class="search-form__field" type="text" placeholder="Поиск на сайте">
                         </form>
@@ -56,7 +56,7 @@
                     </div>
                 </header>
 
-                <nav class="nav">
+                <nav class="nav js-nav">
                     <a class="nav__item nav__item_type_btn" href="{13 | url}">
                         {13 | resource : 'pagetitle'}
                         <span class="nav__item-icon">{include 'file:chunks/icons/arrow-down-icon.tpl'}</span>
@@ -72,8 +72,8 @@
                     ]}
 
                     <div class="nav__aside">
-                        <button class="nav__btn js-search-toggler" type="button">{include 'file:chunks/icons/search-icon.tpl'}</button>
-                        <button class="nav__btn js-nav-toggler" type="button">
+                        <button class="nav__btn js-search-btn" type="button">{include 'file:chunks/icons/search-icon.tpl'}</button>
+                        <button class="nav__btn js-nav-btn" type="button">
                             <span class="nav__btn-icon nav__btn-icon_type_open">{include 'file:chunks/icons/nav-icon.tpl'}</span>
                             <span class="nav__btn-icon nav__btn-icon_type_close">{include 'file:chunks/icons/close-icon.tpl'}</span>
                         </button>

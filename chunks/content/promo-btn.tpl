@@ -1,1 +1,1 @@
-<button class="promo__nav-btn {$mod}" type="button">{$caption}</button>
+<button class="promo__nav-btn js-tabs-link {$mod}" type="button" data-pane="promo-tab-{$idx}">{$caption}</button>

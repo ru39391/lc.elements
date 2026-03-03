@@ -1,42 +1,45 @@
 {extends 'file:templates/base.tpl'}
 
 {block 'intro'}
+    <div class="section-title js-section-title">Ключевые направления</div>
     <div class="content content_fs_xl">{$_modx->resource.tv__intro}</div>
 {/block}
 
 {block 'main'}
     {*
-        /////////////////////////
-        /// Виды деятельности ///
-        /////////////////////////
+        ////////////////////////////
+        /// Ключевые направления ///
+        ////////////////////////////
     *}
     {set $promo = json_decode($_modx->resource.tv__promo, true)}
     {set $promo_data}
         {set $promo_counter = 0}
-        {foreach $promo as $promo_item}
+        {foreach $promo as $idx => $promo_item}
             {set $promo_counter+=1}
             {$_modx->getChunk('@FILE chunks/content/promo-item.tpl', [
                 'img' => $promo_item.promo__img,
                 'title' => $promo_item.promo__title,
                 'content' => $promo_item.promo__content,
-                'mod' => $promo_item@first ? 'is-active' : ''
+                'mod' => $promo_item@first ? 'is-active' : '',
+                'idx' => $idx
             ])}
         {/foreach}
     {/set}
 
     {if $promo_counter > 0}
     {set $promo_nav}
-        {foreach $promo as $promo_item}
+        {foreach $promo as $idx => $promo_item}
             {$_modx->getChunk('@FILE chunks/content/promo-btn.tpl', [
                 'caption' => $promo_item.promo__title,
-                'mod' => $promo_item@first ? 'is-active' : ''
+                'mod' => $promo_item@first ? 'is-active' : '',
+                'idx' => $idx
             ])}
         {/foreach}
     {/set}
     <div class="section">
-        <div class="promo">
+        <div class="promo js-tabs">
             <div class="promo__nav">{$promo_nav}</div>
-            <div class="promo__panel"><div class="promo__panel-title"></div></div>
+            <div class="promo__panel"><div class="promo__panel-title js-tab-caption"></div></div>
             <div class="promo__list">{$promo_data}</div>
         </div>
     </div>
@@ -44,7 +47,7 @@
 
     {*
         ////////////////////////////
-        /// Поставляемые решение ///
+        /// Поставляемые решения ///
         ////////////////////////////
     *}
     {set $hardware = json_decode($_modx->resource.tv__hardware, true)}
@@ -61,7 +64,7 @@
 
     {if $hardware_counter > 0}
     <div class="section">
-        <div class="section-title">Поставляемые решение</div>
+        <div class="section-title js-section-title">Поставляемые решения</div>
         <div class="swiper js-grid-slides">
             {$hardware_data}
             <div class="hardware swiper-wrapper js-grid-wrapper"></div>
@@ -88,7 +91,7 @@
         
     {if $features_counter > 0}
     <div class="section">
-        <div class="section-title">Выгоды</div>
+        <div class="section-title js-section-title">Выгоды</div>
         <div class="swiper js-slides"><div class="features swiper-wrapper">{$features_data}</div></div>
     </div>
     {/if}
@@ -112,7 +115,7 @@
         
     {if $company_counter > 0}
     <div class="section">
-        <div class="section-title">Команда</div>
+        <div class="section-title js-section-title">Команда</div>
         <div class="company">
             <img class="company__bg company__bg_type_xs" src="{$_modx->resource.tv__company_mob ?: $_modx->resource.tv__company_img}" alt="" />
             <img class="company__bg company__bg_type_sm" src="{$_modx->resource.tv__company_img}" alt="" />
@@ -122,4 +125,24 @@
     {/if}
 
     <div class="section content content_fs_xl content_offset_bottom content_type_blockquote">{$_modx->resource.tv__outro}</div>
+
+    {*
+        /////////////////
+        /// Навигация ///
+        /////////////////
+    *}
+    {set $pagenav = json_decode($_modx->resource.tv__pagenav, true)}
+    {set $pagenav_data}
+        {set $pagenav_counter = 0}
+        {foreach $pagenav as $idx => $pagenav_item}
+            {set $pagenav_counter+=1}
+            {$_modx->getChunk('@FILE chunks/nav/pagenav-item.tpl', [
+                'title' => $pagenav_item.pagenav__title,
+                'item' => $pagenav_item.pagenav__item,
+                'hidden' => $pagenav_item.pagenav__hidden,
+                'idx' => $idx
+            ])}
+        {/foreach}
+    {/set}
+    {if $pagenav_counter > 0}<div class="pagenav js-page-nav">{$pagenav_data}</div>{/if}
 {/block}

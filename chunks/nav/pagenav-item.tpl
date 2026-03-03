@@ -1,0 +1,1 @@
+<button class="pagenav__btn js-pagenav-btn" type="button" data-title="{$title}" data-hidden="{$hidden}" data-target="{$idx}">{$item ?: $title}</button>
