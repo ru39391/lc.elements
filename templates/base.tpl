@@ -14,7 +14,7 @@
         <meta name="description" content="{$_modx->resource.description}" itemprop="description" />
         {/block}
         
-        <link href="{'default_tpl_assets' | config}/icons/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="{'default_tpl_assets' | config}icons/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         {$static.css}
     </head>
     <body>
@@ -93,11 +93,13 @@
                         <h1>{$_modx->resource.longtitle ?: $_modx->resource.pagetitle}</h1>
                         {if $_modx->resource.introtext}<p>{$_modx->resource.introtext}</p>{/if}
                     </div>
-                    
+
+                    {if $_modx->resource.content}
                     <div class="section section_type_col zi-2">
                         {block 'intro'}{/block}
                         <div class="content content_fs_lg content_width_min">{$_modx->resource.content}</div>
-                    </div>                    
+                    </div>        
+                    {/if}            
                 </section>
 
                 {block 'main'}{/block}
@@ -155,17 +157,17 @@
                     <div class="footer__contacts-text">{$_modx->config.default_address}</div>
 
                     {set $contacts = json_decode(12 | resource: 'tv__contacts', true)}
-                    {set $contacts__data}
-                        {set $contacts__counter = 0}
-                        {foreach $contacts as $contacts__item}
-                            {set $contacts__counter+=1}
-                            {$_modx->getChunk('@FILE chunks/footer-contacts/item.tpl', [
-                                'city' => $contacts__item.contacts__city,
-                                'phone' => $contacts__item.contacts__phone,
+                    {set $contacts_data}
+                        {set $contacts_counter = 0}
+                        {foreach $contacts as $contacts_item}
+                            {set $contacts_counter+=1}
+                            {$_modx->getChunk('@FILE chunks/content/contacts-item.tpl', [
+                                'city' => $contacts_item.contacts__city,
+                                'phone' => $contacts_item.contacts__phone,
                             ])}
                         {/foreach}
                     {/set}
-                    {if $contacts__counter > 0}<ul class="footer__contacts-list">{$contacts__data}</ul>{/if}
+                    {if $contacts_counter > 0}<ul class="footer__contacts-list">{$contacts_data}</ul>{/if}
                 </div>
                 <div class="footer__disclaimer">{$_modx->config.default_disclaimer}</div>
             </div>

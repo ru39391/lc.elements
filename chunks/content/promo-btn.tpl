@@ -1,0 +1,1 @@
+<button class="promo__nav-btn {$mod}" type="button">{$caption}</button>
